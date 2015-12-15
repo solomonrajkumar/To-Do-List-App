@@ -7,3 +7,5 @@ The user can
 3. View all the reminders
 
 This app will be built using tabbed views template.
+
+15th Dec 2015: Initial version which involves the basic UI of the To-Do-List app
