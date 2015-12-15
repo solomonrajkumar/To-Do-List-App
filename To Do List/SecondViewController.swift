@@ -11,6 +11,16 @@ import UIKit
 class SecondViewController: UIViewController, UITextViewDelegate {
     
     
+    @IBAction func addNoteAction(sender: AnyObject) {
+        
+        print(addNotesTextView.text)
+        addNotesTextView.resignFirstResponder()
+        //objFirstViewController.notesTableView.reloadData()
+        
+        notes.append(addNotesTextView.text)
+        
+        self.tabBarController?.selectedIndex = 0
+    }
     @IBOutlet weak var addNotesTextView: UITextView!
     
     
@@ -18,14 +28,19 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        addNotesTextView.becomeFirstResponder()
+        //addNotesTextView.becomeFirstResponder()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        addNotesTextView.becomeFirstResponder()
 
+    }
 
 }
 
