@@ -8,7 +8,9 @@
 
 import UIKit
 
+// global variable to hold notes
 var notes = [String]()
+
 
 class FirstViewController: UIViewController, UITableViewDelegate {
     
@@ -18,6 +20,15 @@ class FirstViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // check if NSUserDefaults is already set for storing persistent data
+        if NSUserDefaults.standardUserDefaults().objectForKey("persistentNotes") != nil {
+            
+            // if set, pull the persisted data into local notes array
+            notes = NSUserDefaults.standardUserDefaults().objectForKey("persistentNotes") as! [String]
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,12 +37,14 @@ class FirstViewController: UIViewController, UITableViewDelegate {
     }
     
     
+    // function to pull number of rows in table
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return notes.count
         
     }
     
+    // function to populate cell values
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: .Default, reuseIdentifier: "NoteCell")
@@ -42,9 +55,29 @@ class FirstViewController: UIViewController, UITableViewDelegate {
         
     }
     
+    // reload table data when view appears
     override func viewDidAppear(animated: Bool) {
         
         notesTableView.reloadData()
+        
+    }
+    
+    // enable the delete feature
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // if delete option is selected
+        if editingStyle ==  UITableViewCellEditingStyle.Delete {
+            
+            // remove the notes at the selected row
+            notes.removeAtIndex(indexPath.row)
+            
+            // update the persistent data
+            NSUserDefaults.standardUserDefaults().setObject(notes, forKey: "persistentNotes")
+            
+            // reload table
+            notesTableView.reloadData()
+            
+        }
         
     }
     
