@@ -8,4 +8,6 @@ The user can
 
 This app will be built using tabbed views template.
 
-15th Dec 2015: Initial version which involves the basic UI of the To-Do-List app
+15th Dec 2015: Initial version which involves the basic UI for the To-Do-List app
+
+15th Dec 2015: First version of the app; User can add new note and view the list of notes added
